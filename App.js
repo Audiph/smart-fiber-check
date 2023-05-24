@@ -1,16 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import RootNavigator from './src/navigators/RootNavigator';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#000',
+    },
+  };
+
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
+    <SafeAreaProvider style={styles.container}>
+      <NavigationContainer theme={theme}>
         <RootNavigator />
       </NavigationContainer>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaProvider>
   );
 }
 

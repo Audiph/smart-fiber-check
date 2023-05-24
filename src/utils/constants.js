@@ -1,11 +1,13 @@
 export const FIRST_INTRO_SCREEN = {
-  title: 'First Intro',
-  description: 'First Description',
+  title: 'Troubleshoot with Modems easily',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };
 
-export const LAST_INTRO_SCREEN_02 = {
-  title: 'Last Intro',
-  description: 'Last description',
+export const LAST_INTRO_SCREEN = {
+  title: 'By using your camera only',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };
 
 export const LOGIN_SCREEN = {

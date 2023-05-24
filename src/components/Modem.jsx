@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Svg, { Path, Circle } from 'react-native-svg';
 
-const Modem = () => (
+const Modem = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 496.8 496.8"
     xmlSpace="preserve"
     width={24}
     height={24}
+    {...props}
   >
     <Path
       style={{

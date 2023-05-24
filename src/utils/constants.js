@@ -1,14 +1,14 @@
-export const INTRO_SCREEN_01 = {
-  title: '',
-  description: '',
+export const FIRST_INTRO_SCREEN = {
+  title: 'First Intro',
+  description: 'First Description',
 };
 
-export const INTRO_SCREEN_02 = {
-  title: '',
-  description: '',
+export const LAST_INTRO_SCREEN_02 = {
+  title: 'Last Intro',
+  description: 'Last description',
 };
 
 export const LOGIN_SCREEN = {
-  title: '',
-  description: '',
+  title: 'Login Intro',
+  description: 'Login Description',
 };

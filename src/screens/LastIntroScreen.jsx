@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LAST_INTRO_SCREEN } from '../utils/constants';
-import Modem from '../components/Modem';
 import { useTheme } from '@react-navigation/native';
 import ScreenIndicators from '../components/ScreenIndicators';
 import PrimaryButton from '../components/PrimaryButton';
+import PhoneCamera from '../components/PhoneCamera';
+import Icons from '@expo/vector-icons/MaterialIcons';
 
 const LastIntroScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -14,8 +15,13 @@ const LastIntroScreen = ({ navigation }) => {
     <SafeAreaView
       style={[styles.screen, { backgroundColor: theme.colors.card }]}
     >
+      <View style={styles.back_content}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.modem_contents}>
-        <Modem width={300} height={300} />
+        <PhoneCamera width={300} height={300} />
       </View>
       <View style={styles.contents} />
       <View style={styles.div_contents}>
@@ -25,7 +31,7 @@ const LastIntroScreen = ({ navigation }) => {
         <View style={styles.button_content}>
           <PrimaryButton
             label="Next"
-            onPress={() => navigation.navigate('LastIntroScreen')}
+            onPress={() => navigation.navigate('LoginScreen')}
           />
         </View>
       </View>
@@ -38,6 +44,13 @@ export default LastIntroScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+  },
+
+  back_content: {
+    paddingHorizontal: 24,
+    height: 52,
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 
   modem_contents: {

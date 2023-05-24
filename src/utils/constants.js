@@ -11,6 +11,7 @@ export const LAST_INTRO_SCREEN = {
 };
 
 export const LOGIN_SCREEN = {
-  title: 'Login Intro',
-  description: 'Login Description',
+  title: `Let's Get Started`,
+  description:
+    'To register for an account, kindly enter your details and hit Register. Otherwise, login your account',
 };

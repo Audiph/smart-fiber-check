@@ -4,6 +4,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  useWindowDimensions,
 } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,98 +18,109 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 const LoginScreen = ({ navigation }) => {
   const theme = useTheme();
+  const dimensions = useWindowDimensions();
 
   return (
-    <SafeAreaView
-      style={[styles.screen, { backgroundColor: theme.colors.card }]}
-    >
-      <Animated.View
-        entering={FadeInUp.duration(1000).springify()}
-        style={styles.back_content}
+    <KeyboardAvoidingView behavior="position" style={styles.keyboard_view}>
+      <SafeAreaView
+        style={[
+          styles.screen,
+          { backgroundColor: theme.colors.card, minHeight: dimensions.height },
+        ]}
       >
-        <TouchableOpacity onPress={() => navigation.replace('LastIntroScreen')}>
-          <Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
-        </TouchableOpacity>
-      </Animated.View>
-      <Animated.View
-        entering={FadeInUp.delay(200).duration(1000).springify()}
-        style={styles.phone_contents}
-      >
-        <PhoneHold width={400} height={400} />
-      </Animated.View>
-      <View style={styles.div_contents}>
-        <Animated.Text
-          entering={FadeInDown.duration(1000).springify()}
-          style={styles.title}
+        <Animated.View
+          entering={FadeInUp.duration(1000).springify()}
+          style={styles.back_content}
         >
-          {LOGIN_SCREEN.title}
-        </Animated.Text>
-        <Animated.Text
-          entering={FadeInDown.delay(100).duration(1000).springify()}
-          style={styles.description}
+          <TouchableOpacity
+            onPress={() => navigation.replace('LastIntroScreen')}
+          >
+            <Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View
+          entering={FadeInUp.delay(200).duration(1000).springify()}
+          style={styles.phone_contents}
         >
-          {LOGIN_SCREEN.description}
-        </Animated.Text>
-        <View style={styles.button_content}>
-          <Animated.View
-            entering={FadeInDown.delay(200).duration(1000).springify()}
-            style={styles.fields}
+          <PhoneHold width={400} height={400} />
+        </Animated.View>
+        <View style={styles.div_contents}>
+          <Animated.Text
+            entering={FadeInDown.duration(1000).springify()}
+            style={styles.title}
           >
-            <TextInput
-              placeholder="Email"
-              style={[
-                styles.email,
-                {
-                  color: theme.colors.text,
-                  backgroundColor: theme.colors.background,
-                },
-              ]}
-            />
-            <Icons
-              name="email"
-              size={24}
-              color={theme.colors.text}
-              style={styles.input_icon}
-            />
-          </Animated.View>
-          <Animated.View
-            entering={FadeInDown.delay(400).duration(1000).springify()}
-            style={styles.fields}
+            {LOGIN_SCREEN.title}
+          </Animated.Text>
+          <Animated.Text
+            entering={FadeInDown.delay(100).duration(1000).springify()}
+            style={styles.description}
           >
-            <TextInput
-              placeholder="Password"
-              style={[
-                styles.email,
-                {
-                  color: theme.colors.text,
-                  backgroundColor: theme.colors.background,
-                },
-              ]}
-            />
-            <Icons
-              name="lock"
-              size={24}
-              color={theme.colors.text}
-              style={styles.input_icon}
-            />
-          </Animated.View>
-          <Animated.View
-            entering={FadeInDown.delay(600).duration(1000).springify()}
-          >
-            <PrimaryButton
-              label="Login"
-              onPress={() => navigation.navigate('LoginScreen')}
-            />
-          </Animated.View>
+            {LOGIN_SCREEN.description}
+          </Animated.Text>
+          <View style={styles.button_content}>
+            <Animated.View
+              entering={FadeInDown.delay(200).duration(1000).springify()}
+              style={styles.fields}
+            >
+              <TextInput
+                placeholder="Email"
+                style={[
+                  styles.email,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                  },
+                ]}
+              />
+              <Icons
+                name="email"
+                size={24}
+                color={theme.colors.text}
+                style={styles.input_icon}
+              />
+            </Animated.View>
+            <Animated.View
+              entering={FadeInDown.delay(400).duration(1000).springify()}
+              style={styles.fields}
+            >
+              <TextInput
+                placeholder="Password"
+                style={[
+                  styles.email,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                  },
+                ]}
+              />
+              <Icons
+                name="lock"
+                size={24}
+                color={theme.colors.text}
+                style={styles.input_icon}
+              />
+            </Animated.View>
+            <Animated.View
+              entering={FadeInDown.delay(600).duration(1000).springify()}
+            >
+              <PrimaryButton
+                label="Login"
+                onPress={() => navigation.navigate('LoginScreen')}
+              />
+            </Animated.View>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  keyboard_view: {
+    flex: 1,
+  },
   screen: {
     flex: 1,
   },

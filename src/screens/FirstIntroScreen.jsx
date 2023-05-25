@@ -6,6 +6,7 @@ import Modem from '../components/Modem';
 import { useTheme } from '@react-navigation/native';
 import ScreenIndicators from '../components/ScreenIndicators';
 import PrimaryButton from '../components/PrimaryButton';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 const FirstIntroScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -14,20 +15,40 @@ const FirstIntroScreen = ({ navigation }) => {
     <SafeAreaView
       style={[styles.screen, { backgroundColor: theme.colors.card }]}
     >
-      <View style={styles.modem_contents}>
+      <Animated.View
+        entering={FadeInUp.duration(1000).springify()}
+        style={styles.modem_contents}
+      >
         <Modem width={300} height={300} />
-      </View>
+      </Animated.View>
       <View style={styles.contents} />
       <View style={styles.div_contents}>
-        <Text style={styles.title}>{FIRST_INTRO_SCREEN.title}</Text>
-        <Text style={styles.description}>{FIRST_INTRO_SCREEN.description}</Text>
-        <ScreenIndicators count={2} activeIndex={0} />
-        <View style={styles.button_content}>
+        <Animated.Text
+          entering={FadeInDown.duration(1000).springify()}
+          style={styles.title}
+        >
+          {FIRST_INTRO_SCREEN.title}
+        </Animated.Text>
+        <Animated.Text
+          entering={FadeInDown.delay(100).duration(1000).springify()}
+          style={styles.description}
+        >
+          {FIRST_INTRO_SCREEN.description}
+        </Animated.Text>
+        <Animated.View
+          entering={FadeInDown.delay(200).duration(1000).springify()}
+        >
+          <ScreenIndicators count={2} activeIndex={0} />
+        </Animated.View>
+        <Animated.View
+          entering={FadeInDown.delay(400).duration(1000).springify()}
+          style={styles.button_content}
+        >
           <PrimaryButton
             label="Next"
-            onPress={() => navigation.navigate('LastIntroScreen')}
+            onPress={() => navigation.replace('LastIntroScreen')}
           />
-        </View>
+        </Animated.View>
       </View>
     </SafeAreaView>
   );

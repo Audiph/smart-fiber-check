@@ -7,6 +7,7 @@ import ScreenIndicators from '../components/ScreenIndicators';
 import PrimaryButton from '../components/PrimaryButton';
 import PhoneCamera from '../components/PhoneCamera';
 import Icons from '@expo/vector-icons/MaterialIcons';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 const LastIntroScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -15,25 +16,50 @@ const LastIntroScreen = ({ navigation }) => {
     <SafeAreaView
       style={[styles.screen, { backgroundColor: theme.colors.card }]}
     >
-      <View style={styles.back_content}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Animated.View
+        entering={FadeInUp.duration(1000).springify()}
+        style={styles.back_content}
+      >
+        <TouchableOpacity
+          onPress={() => navigation.replace('FirstIntroScreen')}
+        >
           <Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
         </TouchableOpacity>
-      </View>
-      <View style={styles.modem_contents}>
+      </Animated.View>
+      <Animated.View
+        entering={FadeInUp.delay(200).duration(1000).springify()}
+        style={styles.phone_contents}
+      >
         <PhoneCamera width={300} height={300} />
-      </View>
+      </Animated.View>
       <View style={styles.contents} />
       <View style={styles.div_contents}>
-        <Text style={styles.title}>{LAST_INTRO_SCREEN.title}</Text>
-        <Text style={styles.description}>{LAST_INTRO_SCREEN.description}</Text>
-        <ScreenIndicators count={2} activeIndex={0} />
-        <View style={styles.button_content}>
+        <Animated.Text
+          entering={FadeInDown.duration(1000).springify()}
+          style={styles.title}
+        >
+          {LAST_INTRO_SCREEN.title}
+        </Animated.Text>
+        <Animated.Text
+          entering={FadeInDown.delay(100).duration(1000).springify()}
+          style={styles.description}
+        >
+          {LAST_INTRO_SCREEN.description}
+        </Animated.Text>
+        <Animated.View
+          entering={FadeInDown.delay(200).duration(1000).springify()}
+        >
+          <ScreenIndicators count={2} activeIndex={0} />
+        </Animated.View>
+        <Animated.View
+          entering={FadeInDown.delay(400).duration(1000).springify()}
+          style={styles.button_content}
+        >
           <PrimaryButton
             label="Next"
-            onPress={() => navigation.navigate('LoginScreen')}
+            onPress={() => navigation.replace('LoginScreen')}
           />
-        </View>
+        </Animated.View>
       </View>
     </SafeAreaView>
   );
@@ -53,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  modem_contents: {
+  phone_contents: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',

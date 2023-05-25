@@ -12,6 +12,7 @@ import Icons from '@expo/vector-icons/MaterialIcons';
 import PhoneHold from '../components/PhoneHold';
 import { LOGIN_SCREEN } from '../utils/constants';
 import PrimaryButton from '../components/PrimaryButton';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 const LoginScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -20,20 +21,38 @@ const LoginScreen = ({ navigation }) => {
     <SafeAreaView
       style={[styles.screen, { backgroundColor: theme.colors.card }]}
     >
-      <View style={styles.back_content}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Animated.View
+        entering={FadeInUp.duration(1000).springify()}
+        style={styles.back_content}
+      >
+        <TouchableOpacity onPress={() => navigation.replace('LastIntroScreen')}>
           <Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
         </TouchableOpacity>
-      </View>
-      <View style={styles.modem_contents}>
+      </Animated.View>
+      <Animated.View
+        entering={FadeInUp.delay(200).duration(1000).springify()}
+        style={styles.phone_contents}
+      >
         <PhoneHold width={400} height={400} />
-      </View>
-      <View style={styles.contents} />
+      </Animated.View>
       <View style={styles.div_contents}>
-        <Text style={styles.title}>{LOGIN_SCREEN.title}</Text>
-        <Text style={styles.description}>{LOGIN_SCREEN.description}</Text>
+        <Animated.Text
+          entering={FadeInDown.duration(1000).springify()}
+          style={styles.title}
+        >
+          {LOGIN_SCREEN.title}
+        </Animated.Text>
+        <Animated.Text
+          entering={FadeInDown.delay(100).duration(1000).springify()}
+          style={styles.description}
+        >
+          {LOGIN_SCREEN.description}
+        </Animated.Text>
         <View style={styles.button_content}>
-          <View style={styles.fields}>
+          <Animated.View
+            entering={FadeInDown.delay(200).duration(1000).springify()}
+            style={styles.fields}
+          >
             <TextInput
               placeholder="Email"
               style={[
@@ -50,8 +69,11 @@ const LoginScreen = ({ navigation }) => {
               color={theme.colors.text}
               style={styles.input_icon}
             />
-          </View>
-          <View style={styles.fields}>
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(400).duration(1000).springify()}
+            style={styles.fields}
+          >
             <TextInput
               placeholder="Password"
               style={[
@@ -68,11 +90,15 @@ const LoginScreen = ({ navigation }) => {
               color={theme.colors.text}
               style={styles.input_icon}
             />
-          </View>
-          <PrimaryButton
-            label="Next"
-            onPress={() => navigation.navigate('LoginScreen')}
-          />
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(600).duration(1000).springify()}
+          >
+            <PrimaryButton
+              label="Login"
+              onPress={() => navigation.navigate('LoginScreen')}
+            />
+          </Animated.View>
         </View>
       </View>
     </SafeAreaView>
@@ -93,18 +119,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  modem_contents: {
+  phone_contents: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
 
-  contents: {
-    padding: 24,
-  },
-
   div_contents: {
-    padding: 16,
+    padding: 24,
   },
 
   title: {

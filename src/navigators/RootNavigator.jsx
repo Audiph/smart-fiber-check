@@ -13,29 +13,15 @@ const RootNavigator = () => {
       <RootStack.Group
         screenOptions={{
           headerShown: false,
+          animation: 'fade',
         }}
       >
         <RootStack.Screen
           name="FirstIntroScreen"
           component={FirstIntroScreen}
-          options={{
-            headerShown: false,
-          }}
         />
-        <RootStack.Screen
-          name="LastIntroScreen"
-          component={LastIntroScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <RootStack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        <RootStack.Screen name="LastIntroScreen" component={LastIntroScreen} />
+        <RootStack.Screen name="LoginScreen" component={LoginScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
   );

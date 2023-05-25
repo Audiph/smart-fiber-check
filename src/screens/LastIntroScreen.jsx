@@ -49,7 +49,7 @@ const LastIntroScreen = ({ navigation }) => {
         <Animated.View
           entering={FadeInDown.delay(200).duration(1000).springify()}
         >
-          <ScreenIndicators count={2} activeIndex={0} />
+          <ScreenIndicators count={2} activeIndex={1} />
         </Animated.View>
         <Animated.View
           entering={FadeInDown.delay(400).duration(1000).springify()}

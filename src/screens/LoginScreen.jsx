@@ -5,8 +5,9 @@ import {
   TextInput,
   KeyboardAvoidingView,
   useWindowDimensions,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
 import Icons from '@expo/vector-icons/MaterialIcons';
@@ -14,10 +15,33 @@ import PhoneHold from '../components/PhoneHold';
 import { LOGIN_SCREEN } from '../utils/constants';
 import PrimaryButton from '../components/PrimaryButton';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../firebase';
 
 const LoginScreen = ({ navigation }) => {
   const theme = useTheme();
   const dimensions = useWindowDimensions();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleLogin = () => {
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredentials) => {
+    //     const user = userCredentials.user;
+    //     console.log('Logged in with: ', user.email);
+    //     navigation.navigate('HomeScreen');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     Alert.alert(error.code);
+    //   });
+    navigation.navigate('HomeScreen');
+  };
 
   return (
     <KeyboardAvoidingView behavior="position" style={styles.keyboard_view}>
@@ -70,6 +94,8 @@ const LoginScreen = ({ navigation }) => {
                     backgroundColor: theme.colors.background,
                   },
                 ]}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
               />
               <Icons
                 name="email"
@@ -91,6 +117,9 @@ const LoginScreen = ({ navigation }) => {
                     backgroundColor: theme.colors.background,
                   },
                 ]}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+                secureTextEntry
               />
               <Icons
                 name="lock"
@@ -102,10 +131,7 @@ const LoginScreen = ({ navigation }) => {
             <Animated.View
               entering={FadeInDown.delay(600).duration(1000).springify()}
             >
-              <PrimaryButton
-                label="Login"
-                onPress={() => navigation.navigate('LoginScreen')}
-              />
+              <PrimaryButton label="Login" onPress={handleLogin} />
             </Animated.View>
           </View>
         </View>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const HomeScreen = () => {
   return (
-    <View>
+    <View style={styles.screen}>
       <Text>HomeScreen</Text>
     </View>
   );
@@ -11,4 +11,8 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+});
